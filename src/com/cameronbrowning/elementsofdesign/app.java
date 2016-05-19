@@ -22,7 +22,7 @@ public class app extends PApplet {
         background(255);
         dapp.update();
         dapp.draw();
-        saveFrame();
+        // saveFrame();
 //        stroke(0);
   //      line(random(width), random(height),random(width), random(height));
     }
