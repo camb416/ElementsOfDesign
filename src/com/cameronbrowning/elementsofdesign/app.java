@@ -10,7 +10,7 @@ public class app extends PApplet {
     Dots dapp;
 
     public void settings(){
-        size(720,480);
+        size(720,720);
     }
 
     public void setup(){
@@ -19,8 +19,10 @@ public class app extends PApplet {
         dapp.setup();
     }
     public void draw(){
+        background(255);
         dapp.update();
         dapp.draw();
+        saveFrame();
 //        stroke(0);
   //      line(random(width), random(height),random(width), random(height));
     }
