@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_elementsofdesign" default="compile.module.elementsofdesign">
+  <dirname property="module.elementsofdesign.basedir" file="${ant.file.module_elementsofdesign}"/>
+  
+  <property name="module.jdk.home.elementsofdesign" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.elementsofdesign" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.elementsofdesign" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.elementsofdesign" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="elementsofdesign.output.dir" value="${module.elementsofdesign.basedir}/out/production/ElementsOfDesign"/>
+  <property name="elementsofdesign.testoutput.dir" value="${module.elementsofdesign.basedir}/out/test/ElementsOfDesign"/>
+  
+  <path id="elementsofdesign.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="elementsofdesign.module.production.classpath">
+    <path refid="${module.jdk.classpath.elementsofdesign}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  <path id="elementsofdesign.runtime.production.module.classpath">
+    <pathelement location="${elementsofdesign.output.dir}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  <path id="elementsofdesign.module.classpath">
+    <path refid="${module.jdk.classpath.elementsofdesign}"/>
+    <pathelement location="${elementsofdesign.output.dir}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  <path id="elementsofdesign.runtime.module.classpath">
+    <pathelement location="${elementsofdesign.testoutput.dir}"/>
+    <pathelement location="${elementsofdesign.output.dir}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.elementsofdesign">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.elementsofdesign">
+    <patternset refid="excluded.from.module.elementsofdesign"/>
+  </patternset>
+  
+  <path id="elementsofdesign.module.sourcepath">
+    <dirset dir="${module.elementsofdesign.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.elementsofdesign" depends="compile.module.elementsofdesign.production,compile.module.elementsofdesign.tests" description="Compile module ElementsOfDesign"/>
+  
+  <target name="compile.module.elementsofdesign.production" depends="register.custom.compilers" description="Compile module ElementsOfDesign; production classes">
+    <mkdir dir="${elementsofdesign.output.dir}"/>
+    <javac2 destdir="${elementsofdesign.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.elementsofdesign}/javac">
+      <compilerarg line="${compiler.args.elementsofdesign}"/>
+      <bootclasspath refid="elementsofdesign.module.bootclasspath"/>
+      <classpath refid="elementsofdesign.module.production.classpath"/>
+      <src refid="elementsofdesign.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.elementsofdesign"/>
+    </javac2>
+    
+    <copy todir="${elementsofdesign.output.dir}">
+      <fileset dir="${module.elementsofdesign.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.elementsofdesign.tests" depends="register.custom.compilers,compile.module.elementsofdesign.production" description="compile module ElementsOfDesign; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.elementsofdesign" description="cleanup module">
+    <delete dir="${elementsofdesign.output.dir}"/>
+    <delete dir="${elementsofdesign.testoutput.dir}"/>
+  </target>
+</project>

@@ -7,22 +7,24 @@ import processing.core.PApplet;
  */
 public class app extends PApplet {
 
-    Dots dapp;
+    Lines app;
 
     public void settings(){
         size(720,720);
+
     }
 
     public void setup(){
-        dapp = new Dots(this);
+        frameRate(60);
+        app = new Lines(this);
         background(255);
-        dapp.setup();
+        app.setup();
     }
     public void draw(){
         background(255);
-        dapp.update();
-        dapp.draw();
-        // saveFrame();
+        app.update();
+        app.draw();
+        saveFrame();
 //        stroke(0);
   //      line(random(width), random(height),random(width), random(height));
     }
