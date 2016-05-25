@@ -54,7 +54,7 @@ public class Shape {
         p.rotate((float)Math.PI,0,1,0);
         p.pushMatrix();
 
-    p.rotate(rotation,(float)id/(float)maxNum+(float)Math.sin(f)/2.0f,1,0);
+    p.rotate(rotation,(float)Math.sin((float)f/64.0f),1,(float)Math.cos((float)f/128.0f));
 
         p.noStroke();
         p.fill(0);

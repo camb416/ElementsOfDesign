@@ -16,7 +16,7 @@ public class Shapes {
 
     Shapes(PApplet _p){
         p = _p;
-        numShapes = 8192;
+        numShapes = 1024;
         shapes = new Shape[numShapes];
         for(int i=0;i<numShapes;i++){
             shapes[i] = new Shape(p);
@@ -25,8 +25,8 @@ public class Shapes {
     }
     public void setup(){
         for(int i=0;i<numShapes;i++){
-            shapes[i].setup(i/10.0f,0);
-            shapes[i].setSize((float)Math.sin((float)i/(float)numShapes*(float)Math.PI)*5.0f+1.0f);
+            shapes[i].setup((float)i/(float)numShapes*720.0f,0);
+            shapes[i].setSize((float)Math.sin((float)i/(float)numShapes*(float)Math.PI)*15.0f+2.0f);
             shapes[i].setUID(i);
             shapes[i].setMax(numShapes);
 
@@ -34,7 +34,8 @@ public class Shapes {
     }
     public void update(){
         for(int i=0;i<numShapes;i++){
-            shapes[i].setRotation(i+p.frameCount/100.0f);
+            shapes[i].update(p.frameCount);
+            shapes[i].setRotation((float)i/(float)numShapes*(float)Math.PI*32.0f+p.frameCount/100.0f);
 
         }
     }

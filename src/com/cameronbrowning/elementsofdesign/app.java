@@ -8,9 +8,11 @@ import processing.core.PApplet;
 public class app extends PApplet {
 
     Shapes app;
+    boolean saveFrames;
 
     public void settings(){
         size(720,720, P3D);
+        saveFrames = false;
 
 
     }
@@ -25,9 +27,12 @@ public class app extends PApplet {
         background(255);
          app.update();
         app.draw();
-        //saveFrame();
+        if(saveFrames) saveFrame();
 //        stroke(0);
   //      line(random(width), random(height),random(width), random(height));
     }
 
+    public void mousePressed(int b){
+        saveFrames = !saveFrames;
+    }
 }
