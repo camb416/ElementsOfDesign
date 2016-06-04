@@ -3,7 +3,11 @@
     <output-path>$PROJECT_DIR$/out/artifacts/ElementsOfDesign_jar</output-path>
     <root id="archive" name="ElementsOfDesign.jar">
       <element id="module-output" name="ElementsOfDesign" />
+      <element id="extracted-dir" path="/Applications/Processing.app/Contents/Java/core/library/jogl-all.jar" path-in-jar="/" />
       <element id="extracted-dir" path="/Applications/Processing.app/Contents/Java/core.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/Applications/Processing.app/Contents/Java/core/library/gluegen-rt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/Applications/Processing.app/Contents/Java/core/library/jogl-all-natives-macosx-universal.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="/Applications/Processing.app/Contents/Java/core/library/gluegen-rt-natives-macosx-universal.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
