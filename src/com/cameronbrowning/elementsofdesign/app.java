@@ -8,7 +8,7 @@ import processing.core.PApplet;
 public class app extends PApplet {
 
     SphereWrap [] wraps;
-    int numWraps = 16;
+    int numWraps = 255;
 
     ParticleSphere particleSphere;
 
@@ -22,8 +22,8 @@ public class app extends PApplet {
     public void settings(){
         size(720,720,P3D);
         saveFrames = false;
-        //smooth(8);
-        noSmooth();
+        smooth(8);
+       // noSmooth();
     }
 
     public void setup(){
@@ -34,16 +34,26 @@ public class app extends PApplet {
         dRX = dRY = 0.0f;
         particleSphere = new ParticleSphere(this);
 
-        frameRate(60);
 
+        wraps = new SphereWrap[numWraps];
+
+        frameRate(60);
+        for(int i=0;i<numWraps;i++){
+            wraps[i] = new SphereWrap(this);
+            wraps[i].setup(random(PI),
+                    (random(-10.0f,10.0f))/100.0f, // angle speed
+                    random(10.0f),
+                    (float)i/(float)numWraps*0.5f+ 8.10f, // radius multiplier
+                    random(100.0f,100.0f),
+                    random(0.5f,0.7f) // spinspeed
+            );
+        }
 
 
 
         background(255);
 
-        for(int i=0;i<numWraps;i++){
-            wraps[i].setup();
-        }
+
 
     }
 

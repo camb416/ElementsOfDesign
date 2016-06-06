@@ -12,7 +12,7 @@ public class ParticleSphere {
     PApplet p;
 
     public ParticleSphere(PApplet _p){
-        numParticles = 8192*2;
+        numParticles = 8192*4;
         p = _p;
         particles = new Particle[numParticles];
         for(int i=0;i<numParticles;i++){

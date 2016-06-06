@@ -45,7 +45,7 @@ public class SphereWrap {
 
         ca = cr = 0;
 
-        c = (int)p.random(255);
+        c = (int)p.random(64)+192;
 
         cxHistory = new float[trailLength];
         cyHistory = new float[trailLength];
@@ -173,6 +173,8 @@ public class SphereWrap {
         }
         p.noStroke();
         p.fill(c);
+        //p.noFill();
+        //p.stroke(c);
         p.beginShape(p.TRIANGLE_STRIP);
         for (int i = 0; i < trailLength; i++) {
             //float px = x + p.cos(radians(angle)) * outsideRadius;

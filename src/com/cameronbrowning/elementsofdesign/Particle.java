@@ -73,7 +73,7 @@ public class Particle {
         p.pushMatrix();
         p.translate(x,y,z);
         //p.stroke(c,c,c,64);
-        p.stroke(0,0,0,255 );
+        p.stroke(c );
         p.point(0,0,0);
         p.popMatrix();
     }
