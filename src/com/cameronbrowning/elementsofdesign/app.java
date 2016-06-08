@@ -7,10 +7,14 @@ import processing.core.PApplet;
  */
 public class app extends PApplet {
 
-    SphereWrap [] wraps;
-    int numWraps = 255;
+    // sphere wrap
+    // SphereWrap [] wraps;
+    // int numWraps = 255;
 
     ParticleSphere particleSphere;
+
+    RibbonRenderer r;
+    RibbonRenderer r2;
 
 
 
@@ -34,9 +38,14 @@ public class app extends PApplet {
         dRX = dRY = 0.0f;
         particleSphere = new ParticleSphere(this);
 
+        r = new RibbonRenderer(this);
+        r.setup(8.0f);
+        r2 = new RibbonRenderer(this);
+        r2.setup(-16.0f);
 
+/*
+// sphere wrap setup
         wraps = new SphereWrap[numWraps];
-
         frameRate(60);
         for(int i=0;i<numWraps;i++){
             wraps[i] = new SphereWrap(this);
@@ -48,10 +57,13 @@ public class app extends PApplet {
                     random(0.5f,0.7f) // spinspeed
             );
         }
-
+*/
 
 
         background(255);
+
+        dRX = 5.0f;
+        dRY = 3.0f;
 
 
 
@@ -61,36 +73,43 @@ public class app extends PApplet {
 
     public void draw(){
 
+        r.update();
+        r2.update();
+        particleSphere.update();
+
         rX += (dRX-rX)/64.0f;
         rY += (dRY-rY)/64.0f;
 
-        for(int i=0;i<numWraps;i++){
-            wraps[i].update();
-        }
+        //for(int i=0;i<numWraps;i++){
+        //    wraps[i].update();
+        //}
 
         background(255);
         //fill(255,255,255,128);
         //rect(0,0,width,height);
 
 
-        particleSphere.update();
+
+
+
         pushMatrix();
         translate(width/2,height/2);
         rotateX(rX);
         rotateY(rY);
-        particleSphere.draw();
+        //particleSphere.draw();
 
-        for(int i=0;i<numWraps;i++){
-            wraps[i].draw();
-        }
+        //for(int i=0;i<numWraps;i++){
+        //    wraps[i].draw();
+        //}
+
+        r.draw();
+        r2.draw();
 
         popMatrix();
 
 
 
         if(saveFrames) saveFrame();
-//        stroke(0);
-  //      line(random(width), random(height),random(width), random(height));
     }
 
     public void mousePressed(){
