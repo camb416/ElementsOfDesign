@@ -18,13 +18,15 @@ public class Point3D {
     }
 
     public void setup(){
-        this.setup(p.random(p.TWO_PI),p.random(p.TWO_PI));
+        this.setup(p.random(p.TWO_PI),p.random(p.TWO_PI), 200);
     }
 
-    public void setup(float _theta, float _phi){
+    public void setup(float _theta, float _phi, float _r){
         theta = _theta;
         phi = _phi;
+        r = _r;
     }
+
     public void update(){
 
         x = p.cos(theta) * p.sin(phi) * r;

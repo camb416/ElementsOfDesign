@@ -11,12 +11,14 @@ public class app extends PApplet {
     // SphereWrap [] wraps;
     // int numWraps = 255;
 
-    ParticleSphere particleSphere;
+    // ParticleSphere particleSphere;
 
-    RibbonRenderer r;
-    RibbonRenderer r2;
+    //RibbonRenderer r;
+    //RibbonRenderer r2;
+    RibbonRenderer[] ribbons;
+    int numRibbons;
 
-
+    float spinMod, dSpinMod;
 
     boolean saveFrames;
 
@@ -25,23 +27,35 @@ public class app extends PApplet {
 
     public void settings(){
         size(720,720,P3D);
-        saveFrames = false;
+        saveFrames = true;
         smooth(8);
        // noSmooth();
+
     }
 
     public void setup(){
 
-
+        spinMod = 1.0f;
+        dSpinMod = 0.0f;
+        numRibbons = 32;
         rX = 1.0f;
         rY = 2.0f;
         dRX = dRY = 0.0f;
-        particleSphere = new ParticleSphere(this);
+       // particleSphere = new ParticleSphere(this);
 
-        r = new RibbonRenderer(this);
-        r.setup(8.0f);
-        r2 = new RibbonRenderer(this);
-        r2.setup(-16.0f);
+
+        ribbons = new RibbonRenderer[numRibbons];
+
+//        r = new RibbonRenderer(this);
+//        r.setup(4.0f);
+//        r2 = new RibbonRenderer(this);
+//        r2.setup(-4.0f);
+
+        for(int i=0;i<numRibbons;i++){
+            RibbonRenderer r = new RibbonRenderer(this);
+            r.setup((float)i/(float)numRibbons*8.0f, i*5.0f+100.0f);
+            ribbons[i] = r;
+        }
 
 /*
 // sphere wrap setup
@@ -73,9 +87,16 @@ public class app extends PApplet {
 
     public void draw(){
 
-        r.update();
-        r2.update();
-        particleSphere.update();
+        lights();
+
+        spinMod += (dSpinMod-spinMod)/1024.0f;
+
+        for(int i=0;i<numRibbons;i++){
+            ribbons[i].update(((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f)*spinMod, ((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f*-1.0f)*spinMod);
+        }
+//        r.update((float)frameCount*-0.01f);
+//        r2.update((float)frameCount*0.01f);
+//        particleSphere.update();
 
         rX += (dRX-rX)/64.0f;
         rY += (dRY-rY)/64.0f;
@@ -102,8 +123,12 @@ public class app extends PApplet {
         //    wraps[i].draw();
         //}
 
-        r.draw();
-        r2.draw();
+//        r.draw();
+//        r2.draw();
+
+        for(int i=0;i<numRibbons;i++){
+            ribbons[i].draw();
+        }
 
         popMatrix();
 
@@ -122,6 +147,6 @@ public class app extends PApplet {
     }
 
     public void keyPressed(){
-        particleSphere.punch();
+        //particleSphere.punch();
     }
 }
