@@ -36,7 +36,17 @@ public class Point3D {
     public void draw(){
         p.pushMatrix();
         p.translate(x,y,z);
+        p.noFill();
+        p.stroke(0);
         p.point(0,0,0);
+        p.popMatrix();
+    }
+    public void drawSphere(float _r){
+        p.pushMatrix();
+        p.translate(x,y,z);
+        p.noFill();
+        p.stroke(0);
+        p.sphere(_r);
         p.popMatrix();
     }
 

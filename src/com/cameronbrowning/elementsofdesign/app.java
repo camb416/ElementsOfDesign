@@ -15,10 +15,14 @@ public class app extends PApplet {
 
     //RibbonRenderer r;
     //RibbonRenderer r2;
-    RibbonRenderer[] ribbons;
-    int numRibbons;
 
-    float spinMod, dSpinMod;
+
+    // ribbonrenderers
+//    RibbonRenderer[] ribbons;
+//    int numRibbons;
+//    float spinMod, dSpinMod;
+
+    SphereGrowth s;
 
     boolean saveFrames;
 
@@ -35,27 +39,31 @@ public class app extends PApplet {
 
     public void setup(){
 
-        spinMod = 1.0f;
-        dSpinMod = 0.0f;
-        numRibbons = 32;
-        rX = 1.0f;
-        rY = 2.0f;
-        dRX = dRY = 0.0f;
-       // particleSphere = new ParticleSphere(this);
+        s = new SphereGrowth(this);
+        s.setup();
 
-
-        ribbons = new RibbonRenderer[numRibbons];
-
-//        r = new RibbonRenderer(this);
-//        r.setup(4.0f);
-//        r2 = new RibbonRenderer(this);
-//        r2.setup(-4.0f);
-
-        for(int i=0;i<numRibbons;i++){
-            RibbonRenderer r = new RibbonRenderer(this);
-            r.setup((float)i/(float)numRibbons*8.0f, i*5.0f+100.0f);
-            ribbons[i] = r;
-        }
+        // ribbonrenderers
+//        spinMod = 1.0f;
+//        dSpinMod = 0.0f;
+//        numRibbons = 32;
+//        rX = 1.0f;
+//        rY = 2.0f;
+//        dRX = dRY = 0.0f;
+//       // particleSphere = new ParticleSphere(this);
+//
+//
+//        ribbons = new RibbonRenderer[numRibbons];
+//
+////        r = new RibbonRenderer(this);
+////        r.setup(4.0f);
+////        r2 = new RibbonRenderer(this);
+////        r2.setup(-4.0f);
+//
+//        for(int i=0;i<numRibbons;i++){
+//            RibbonRenderer r = new RibbonRenderer(this);
+//            r.setup((float)i/(float)numRibbons*8.0f, i*5.0f+100.0f);
+//            ribbons[i] = r;
+//        }
 
 /*
 // sphere wrap setup
@@ -87,13 +95,16 @@ public class app extends PApplet {
 
     public void draw(){
 
-        lights();
+        s.update();
 
-        spinMod += (dSpinMod-spinMod)/1024.0f;
+       // lights();
 
-        for(int i=0;i<numRibbons;i++){
-            ribbons[i].update(((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f)*spinMod, ((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f*-1.0f)*spinMod);
-        }
+        // ribbonrenders
+//        spinMod += (dSpinMod-spinMod)/1024.0f;
+//
+//        for(int i=0;i<numRibbons;i++){
+//            ribbons[i].update(((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f)*spinMod, ((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f*-1.0f)*spinMod);
+//        }
 //        r.update((float)frameCount*-0.01f);
 //        r2.update((float)frameCount*0.01f);
 //        particleSphere.update();
@@ -117,6 +128,8 @@ public class app extends PApplet {
         translate(width/2,height/2);
         rotateX(rX);
         rotateY(rY);
+
+        s.draw();
         //particleSphere.draw();
 
         //for(int i=0;i<numWraps;i++){
@@ -126,9 +139,13 @@ public class app extends PApplet {
 //        r.draw();
 //        r2.draw();
 
-        for(int i=0;i<numRibbons;i++){
-            ribbons[i].draw();
-        }
+        // ribbons
+//        for(int i=0;i<numRibbons;i++){
+//            ribbons[i].draw();
+//        }
+
+
+
 
         popMatrix();
 
