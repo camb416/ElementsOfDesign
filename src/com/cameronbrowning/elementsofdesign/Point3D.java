@@ -44,8 +44,8 @@ public class Point3D {
     public void drawSphere(float _r){
         p.pushMatrix();
         p.translate(x,y,z);
-        p.noFill();
-        p.stroke(0);
+        p.fill(255);
+        p.noStroke();
         p.sphere(_r);
         p.popMatrix();
     }

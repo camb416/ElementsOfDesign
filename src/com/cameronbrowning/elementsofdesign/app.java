@@ -7,6 +7,13 @@ import processing.core.PApplet;
  */
 public class app extends PApplet {
 
+
+//    Leaf l;
+//    Leaf l2;
+
+    Leaf[] leaves;
+    int numLeaves;
+
     // sphere wrap
     // SphereWrap [] wraps;
     // int numWraps = 255;
@@ -20,9 +27,9 @@ public class app extends PApplet {
     // ribbonrenderers
 //    RibbonRenderer[] ribbons;
 //    int numRibbons;
-//    float spinMod, dSpinMod;
+    float spinMod, dSpinMod;
 
-    SphereGrowth s;
+   // SphereGrowth s;
 
     boolean saveFrames;
 
@@ -31,7 +38,7 @@ public class app extends PApplet {
 
     public void settings(){
         size(720,720,P3D);
-        saveFrames = true;
+        saveFrames = false;
         smooth(8);
        // noSmooth();
 
@@ -39,12 +46,31 @@ public class app extends PApplet {
 
     public void setup(){
 
-        s = new SphereGrowth(this);
-        s.setup();
+       // s = new SphereGrowth(this);
+       // s.setup();
+
+//        l = new Leaf(this);
+//        l.setup((float)Math.PI,200.0f);
+//        l2 = new Leaf(this);
+//        l2.setup(0,175.0f);
+
+        numLeaves = 64;
+        leaves = new Leaf[numLeaves];
+        for(int i=0;i<numLeaves;i++){
+            Leaf thisLeaf = new Leaf(this);
+//            thisLeaf.setup((float)Math.PI*2.0f*(float)i/(float)numLeaves,(float)Math.sin((float)i/(float)numLeaves*(float)Math.PI)*75.0f+75.0f);
+            thisLeaf.setup((float)Math.PI*16.0f*(float)i/(float)numLeaves,
+                    (float)Math.cos((float)i/(float)numLeaves*Math.PI*2.0f)* 50.0f+200.0f,
+                    (float)i/(float)numLeaves*160.0f);
+
+            leaves[i] = thisLeaf;
+        }
+
+
 
         // ribbonrenderers
-//        spinMod = 1.0f;
-//        dSpinMod = 0.0f;
+        spinMod = 1.0f;
+        dSpinMod = 0.0f;
 //        numRibbons = 32;
 //        rX = 1.0f;
 //        rY = 2.0f;
@@ -95,12 +121,19 @@ public class app extends PApplet {
 
     public void draw(){
 
-        s.update();
+//        l.update();
+//        l2.update();
+        //s.update();
+        for(int i=0;i<numLeaves;i++) {
+            Leaf thisLeaf = leaves[i];
+            thisLeaf.update();
+        }
 
-       // lights();
+
+        lights();
 
         // ribbonrenders
-//        spinMod += (dSpinMod-spinMod)/1024.0f;
+        spinMod += (dSpinMod-spinMod)/1024.0f;
 //
 //        for(int i=0;i<numRibbons;i++){
 //            ribbons[i].update(((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f)*spinMod, ((float)frameCount*(float)i/(float)numRibbons*0.02f-0.01f*-1.0f)*spinMod);
@@ -109,8 +142,8 @@ public class app extends PApplet {
 //        r2.update((float)frameCount*0.01f);
 //        particleSphere.update();
 
-        rX += (dRX-rX)/64.0f;
-        rY += (dRY-rY)/64.0f;
+        rX += (dRX-rX)/4.0f;
+        rY += (dRY-rY)/4.0f;
 
         //for(int i=0;i<numWraps;i++){
         //    wraps[i].update();
@@ -121,7 +154,11 @@ public class app extends PApplet {
         //rect(0,0,width,height);
 
 
-
+        line(0,0,0,1000,0,0);
+        stroke(0,255,0);
+        line(0,0,0,0,1000,0);
+        stroke(0,0,255);
+        line(0,0,0,0,0,1000);
 
 
         pushMatrix();
@@ -129,7 +166,16 @@ public class app extends PApplet {
         rotateX(rX);
         rotateY(rY);
 
-        s.draw();
+//        l.draw();
+//        l2.draw();
+noStroke();
+        for(int i=0;i<numLeaves;i++) {
+            Leaf thisLeaf = leaves[i];
+            thisLeaf.draw();
+        }
+        //s.draw();
+
+
         //particleSphere.draw();
 
         //for(int i=0;i<numWraps;i++){
