@@ -54,14 +54,20 @@ public class app extends PApplet {
 //        l2 = new Leaf(this);
 //        l2.setup(0,175.0f);
 
-        numLeaves = 64;
+        numLeaves = 256;
         leaves = new Leaf[numLeaves];
         for(int i=0;i<numLeaves;i++){
             Leaf thisLeaf = new Leaf(this);
 //            thisLeaf.setup((float)Math.PI*2.0f*(float)i/(float)numLeaves,(float)Math.sin((float)i/(float)numLeaves*(float)Math.PI)*75.0f+75.0f);
-            thisLeaf.setup((float)Math.PI*16.0f*(float)i/(float)numLeaves,
-                    (float)Math.cos((float)i/(float)numLeaves*Math.PI*2.0f)* 50.0f+200.0f,
-                    (float)i/(float)numLeaves*160.0f);
+      //      thisLeaf.setup((float)Math.PI/16.0f*(float)i/(float)numLeaves,
+      //              (float)Math.cos((float)i/(float)numLeaves*Math.PI*2.0f)* 50.0f+200.0f,
+      //              (float)i/(float)numLeaves*160.0f);
+
+
+
+            thisLeaf.setup(360.0f/3.0f*(float)i/(float)numLeaves,
+                    175.0f*(float)i/(float)numLeaves,
+                    45.0f*(float)i/(float)numLeaves+45.0f);
 
             leaves[i] = thisLeaf;
         }
@@ -110,8 +116,9 @@ public class app extends PApplet {
 
         background(255);
 
-        dRX = 5.0f;
-        dRY = 3.0f;
+        dRX = rX = 2.8333333f;
+        dRY = rY = 6.0333333f;
+
 
 
 
@@ -153,13 +160,13 @@ public class app extends PApplet {
         //fill(255,255,255,128);
         //rect(0,0,width,height);
 
-
+/*
         line(0,0,0,1000,0,0);
         stroke(0,255,0);
         line(0,0,0,0,1000,0);
         stroke(0,0,255);
         line(0,0,0,0,0,1000);
-
+*/
 
         pushMatrix();
         translate(width/2,height/2);
@@ -202,6 +209,7 @@ noStroke();
 
     public void mousePressed(){
        // saveFrames = !saveFrames;
+        println(dRX + ", " + dRY);
     }
     public void mouseMoved(){
         dRX = (mouseY-height/2)/30.0f;

@@ -36,7 +36,7 @@ public class Leaf {
        //openingRotation = 0.0f;
         numSlices = 12;
         numRows = 24;
-        rowSpread = 60.0f;
+        rowSpread = 15.0f;
         totalAngle = 120.0f;
         numPts = (numRows+1)*numSlices+1;
         if(totalAngle == 180.0f){
@@ -108,13 +108,13 @@ public class Leaf {
       //  p.stroke(255,0,0);
 
 
-
-        p.translate(0.0f,0.0f,-radius);
+        p.rotate((float)p.frameCount/100.0f,angleOffsetX,angleOffsetY,0);
+        p.translate(0.0f,0.0f,-radius*1.5f);
 
       //  p.stroke(0);
       //  p.line(0,0,radius,radius+angleOffsetX*1000,radius+angleOffsetY*1000,radius);
       //  p.noStroke();
-       // p.rotate(openingRotation,angleOffsetX,angleOffsetY,0);
+
        // p.rotate()
 
 //p.stroke(0);
